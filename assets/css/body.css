@@ -1,4 +1,3 @@
-
 .main-section{
 	margin: 0 auto;
 	margin-top: 5%;
@@ -19,8 +18,15 @@
 	margin-top: 30px;
 }
 
-
 th{
 	max-width: auto;
-    white-space: nowrap;
+	white-space: nowrap;
+}
+
+.page-item.active .page-link {
+    background-color: lightgrey !important;
+    border: 1px solid black !important;
+}
+.page-link {
+    color: black !important;
 }

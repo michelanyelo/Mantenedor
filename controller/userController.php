@@ -1,10 +1,8 @@
 <?php
 
 if(isset($_POST['submit'])){
-
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-
 
 	if(empty($username) || empty($password)){
 		echo '<div class="alert alert-danger"> Nombre de usuario o contraseña vacios </div>';

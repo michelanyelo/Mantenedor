@@ -27,20 +27,25 @@ $data = $Equipos->mostrarDatosId($equipoData);
                 <th scope="col">HDD</th>
                 <th scope="col">Monitor</th>
                 <th scope="col">Versión SO</th>
-                <th scope="col">Arquitectura</th>
-                <th scope="col">Versión Office</th>  
+                <th scope="col">Versión Office</th> 
+                <th scope="col">Antigüedad</th>
+                <th scope="col">Fecha de adquisición<br>(dd/mm/aa)</th>
+                <th scope="col">Modificaciones</th>
             </tr>
         </thead>
         <tbody id="table-body">
             <?php
             foreach ($data as $Objeto) { ?>
                 <tr>
-                    <td class="category-idequipo"> <?php echo $Objeto->idEquipos;?></td>
-                    <td class="category-ipequipo"> <?php echo $Objeto->ipEquipos;?></td>
-                    <td class="category-tipoequipo"> 
-                     <?php 
-                     $IDtipoequipo = $Objeto->idTipoEquipos;
-                     switch($IDtipoequipo){
+                    <!-- PROPIEDAD: ID -->
+                    <td> <?php echo $Objeto->idEquipos;?></td>
+                    <!-- PROPIEDAD: IP -->
+                    <td> <?php echo $Objeto->ipEquipos;?></td>
+                    <!-- PROPIEDAD: TIPO -->
+                    <td> 
+                       <?php 
+                       $IDtipoequipo = $Objeto->idTipoEquipos;
+                       switch($IDtipoequipo){
                         case 1:
                         $Nombretipoequipo = 'CPU';
                         break;
@@ -56,7 +61,8 @@ $data = $Equipos->mostrarDatosId($equipoData);
                     echo $Nombretipoequipo;
                     ?>
                 </td>
-                <td class="category-estadoequipo">
+                <!--PROPIEDAD: ESTADO -->
+                <td>
                     <?php 
                     $IDestadoequipo = $Objeto->idEstadoEquipos;
                     switch ($IDestadoequipo){
@@ -72,14 +78,35 @@ $data = $Equipos->mostrarDatosId($equipoData);
                     echo $Nombreestadoequipo;  
                     ?>
                 </td>
-                <td class="category-marcaoequipo"> <?php echo $Objeto->marca_equipos;?></td>
-                <td class="category-procesadoroequipo"> <?php echo $Objeto->procesador_equipos;?></td>
-                <td class="category-ramequipo"> <?php echo $Objeto->ram_equipos;?></td>
-                <td class="category-hddequipo"> <?php echo $Objeto->hdd_equipos;?></td>
-                <td class="category-monitorequipo"> <?php echo $Objeto->monitor_equipos;?></td>
-                <td class="category-sistemaequipo"> <?php echo $Objeto->so_equipos;?></td>
-                <td class="category-arquitecturaequipo"> <?php echo $Objeto->arquitectura_equipos;?></td>
-                <td class="category-officeequipo"> <?php echo $Objeto->office_equipos;?></td>
+                <!-- PROPIEDAD: MARCA -->
+                <td> <?php echo $Objeto->marca_equipos;?></td>
+                <!-- PROPIEDAD: PROCESADOR -->
+                <td> <?php echo $Objeto->procesador_equipos;?></td>
+                <!-- PROPIEDAD: RAM -->
+                <td> <?php echo $Objeto->ram_equipos;?></td>
+                <!-- PROPIEDAD: HDD -->
+                <td> <?php echo $Objeto->hdd_equipos;?></td>
+                <!-- PROPIEDAD: MONITOR -->
+                <td> <?php echo $Objeto->monitor_equipos;?></td>
+                <!-- PROPIEDAD: SISTEMA OPERATIVO + ARQUITECTURA -->
+                <td> <?php echo $Objeto->so_equipos . " de " . $Objeto->arquitectura_equipos;?></td>
+                <!-- PROPIEDAD: OFFICE -->
+                <td> <?php echo $Objeto->office_equipos;?></td>
+                <!-- PROPIEDAD: ANTIGÜEDAD -->
+                <td> <?php echo $Objeto->ant_equipos;?></td>
+                <!-- PROPIEDAD: FECHA DE ADQUISICIÓN -->
+                <?php 
+                $cadena = $Objeto->fechain_equipos;
+                $array = explode("-", $cadena);
+                $dia = $array[2];
+                $dia = trim(substr($dia, 0, 2));
+                $mes = $array[1];
+                $año = $array[0];
+                $fechafinal = $dia . "/" . $mes . "/" . $año;
+                ?>
+                <td> <?php echo $fechafinal;?></td>
+                <!-- PROPIEDAD: MODIFICACIONES -->
+                <td> <?php echo $Objeto->modificacion_equipos;?></td>
             </tr>
         <?php } ?>
     </tbody>

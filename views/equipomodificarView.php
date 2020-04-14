@@ -11,13 +11,13 @@ foreach ($data as $Objeto) {
 			<!-- PROPIEDAD EQUIPO: IP -->
 			<div class="col-4">
 				<label>Ip del equipo</label>
-				<input type="text" class="form-control" id="inputIpEquipo" name="IpEquipo" value="<?=$Objeto->ipEquipos;?>">
-				<small id="ipHelp" class="form-text text-muted">ej: 192.168.1.1</small>
+				<input type="text" class="form-control" name="IpEquipo" value="<?=$Objeto->ipEquipos;?>">
+				<small class="form-text text-muted">ej: 192.168.1.1</small>
 			</div>
 
 			<!-- PROPIEDAD: TIPO EQUIPO-->
 			<div class="col-4">
-				<label for="selTipoEquipo">Tipo de equipo</label>
+				<label>Tipo de equipo</label>
 				<select class="form-control" id="selTipoEquipo" name="TipoEquipo" onchange="document.getElementById('text_content16').value=this.options[this.selectedIndex].text">
 					<?php 
 					$IDtipoequipo = $Objeto->idTipoEquipos;
@@ -49,7 +49,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: ESTADO EQUIPO -->
 			<div class="col-4">
-				<label for="selEstadoEquipo">Estado de equipo</label>
+				<label>Estado de equipo</label>
 				<select class="form-control" id="selEstadoEquipo" name="EstadoEquipo" onchange="document.getElementById('text_content17').value=this.options[this.selectedIndex].text">
 					<?php 
 					$IDestadoequipo = $Objeto->idEstadoEquipos;
@@ -76,11 +76,11 @@ foreach ($data as $Objeto) {
 				<input type="hidden" name="estadoequipo_text" id="text_content17" value="<?=$Nombreestadoequipo;?>" />
 			</div>
 		</div>
+
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-4">
-
 				<!-- PROPIEDAD: MARCA GABINETE -->
-				<label for="selDicMarcasGabinete">Marca del gabinete</label>
+				<label>Marca del gabinete</label>
 				<select class="form-control" id="selDicMarcasGabinete" name="DicMarcasGabinete" onchange="document.getElementById('text_content18').value=this.options[this.selectedIndex].text" >
 					<option value="<?=$Objeto->marca_equipos;?>" selected disabled><?=$Objeto->marca_equipos;?></option>
 					<?php 
@@ -92,7 +92,7 @@ foreach ($data as $Objeto) {
 					}?>
 				</select>
 				<input type="hidden" name="marcagabinete_text" id="text_content18" value="<?=$Objeto->marca_equipos;?>" />
-				<small id="gabineteHelp" class="form-text text-muted">Seleccione Genérico(a) si es desconocido</small>
+				<small class="form-text text-muted">Seleccione Genérico(a) si es desconocido</small>
 			</div>
 
 			<!-- DECONSTRUCCIÓN CADENA MARCA PROCESADOR -->
@@ -106,12 +106,12 @@ foreach ($data as $Objeto) {
 					}
 				}
 			}
-			$cadena_descprocesador = substr($cadena_marcaObjeto, strlen($cadena_marca));
+			$cadena_descprocesador = trim(substr($cadena_marcaObjeto, strlen($cadena_marca)));
 			?>
 
 			<!-- PROPIEDAD: MARCA PROCESADOR -->
 			<div class="col-4">
-				<label for="selDicMarcasProcesador">Marca del procesador</label>
+				<label>Marca del procesador</label>
 				<select class="form-control" id="selDicMarcasProcesador" name="DicMarcasProcesador" onchange="document.getElementById('text_content19').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_marca;?>" selected disabled><?=$cadena_marca;?></option>
 					<?php 
@@ -127,13 +127,13 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: RENDIMIENTO PROCESADOR -->
 			<div class="col-4">
-				<label for="inputRendimientoProcesador">Descripción del procesador</label>
-				<input type="text" class="form-control" id="inputRendimientoProcesador" name="inputRendimientoProcesador" value="<?=$cadena_descprocesador ?>"> 
-				<small id="rendimientoProcesadorlHelp" class="form-text text-muted">ej: i5-4210U</small>
+				<label>Descripción del procesador</label>
+				<input type="text" class="form-control" name="inputRendimientoProcesador" value="<?=$cadena_descprocesador ?>"> 
+				<small class="form-text text-muted">ej: i5-4210U</small>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 30px;">
 
+		<div class="row" style="margin-top: 30px;">
 			<!-- DECONSTRUCCIÓN MARCA HDD-->
 			<?php  $cadena_marcaObjeto = $Objeto->hdd_equipos;
 			$data_dicmarcas = $Equipos->mostrarDicMarcas();
@@ -145,12 +145,12 @@ foreach ($data as $Objeto) {
 					}
 				}
 			}
-			$cadena_deschdd = substr($cadena_marcaObjeto, strlen($cadena_marca));
+			$cadena_deschdd = trim(substr($cadena_marcaObjeto, strlen($cadena_marca)));
 			?>
 
 			<!-- PROPIEDAD: MARCA HDD -->
 			<div class="col-4">
-				<label for="selDicMarcasHDD">Marca del Disco Duro</label>
+				<label>Marca del Disco Duro</label>
 				<select class="form-control" id="selDicMarcasHDD" name="DicMarcasHDD" onchange="document.getElementById('text_content20').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_marca;?>" selected disabled><?=$cadena_marca;?></option>
 					<?php 
@@ -166,16 +166,9 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: CAPACIDAD HDD -->
 			<div class="col-4">
-				<label for="selCapacidadHDD">Capacidad de HDD</label>
-				<select class="form-control" id="selCapacidadHDD" name="CapacidadHDD" onchange="document.getElementById('text_content21').value=this.options[this.selectedIndex].text">
-					<option value="0" selected disabled><?=$cadena_deschdd;?></option>
-					<option value="1">2GB</option>
-					<option value="2">4GB</option>
-					<option value="3">8GB</option>
-					<option value="4">16GB</option>
-					<option value="5">32GB</option>
-				</select>
-				<input type="hidden" name="capacidadhdd_text" id="text_content21" value="<?=$cadena_deschdd;?>" />
+				<label>Capacidad de HDD</label>
+				<input type="text" class="form-control" name="CapacidadHDD" value="<?=$cadena_deschdd;?>">
+				<small class="form-text text-muted">ej: 500GB ó 1TB</small>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px;">
@@ -202,7 +195,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: MARCA MEMORIA RAM -->
 			<div class="col-4">
-				<label for="selDicMarcasRam">Marca de la Memoria RAM</label>
+				<label>Marca de la Memoria RAM</label>
 				<select class="form-control" id="selDicMarcasRam" name="DicMarcasRam" onchange="document.getElementById('text_content22').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_marca;?>" selected disabled><?=$cadena_marca;?></option>
 					<?php 
@@ -219,7 +212,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: TIPO MEMORIA RAM -->
 			<div class="col-4">
-				<label for="selTipoRam">Tipo de RAM</label>
+				<label>Tipo de RAM</label>
 				<select class="form-control" id="selTipoRam" name="TipoRam" onchange="document.getElementById('text_content23').value=this.options[this.selectedIndex].text">
 					<option value="0" selected disabled><?=$cadena_tiporam;?></option>
 					<option value="1">DDR</option>
@@ -232,14 +225,17 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: CAPACIDAD MEMORIA RAM -->
 			<div class="col-4">
-				<label for="selCapacidadRam">Capacidad de RAM</label>
+				<label>Capacidad de RAM</label>
 				<select class="form-control" id="selCapacidadRam" name="CapacidadRam" onchange="document.getElementById('text_content24').value=this.options[this.selectedIndex].text">
 					<option value="0" selected disabled><?=$cadena_capacidadram;?></option>
-					<option value="1">2,00 GB</option>
-					<option value="2">4,00 GB</option>
-					<option value="3">8,00 GB</option>
-					<option value="4">16,00 GB</option>
-					<option value="5">32,00 GB</option>
+					<option value="1">2GB</option>
+					<option value="2">3GB</option>
+					<option value="3">4GB</option>
+					<option value="4">5GB</option>
+					<option value="5">6GB</option>
+					<option value="6">8GB</option>
+					<option value="7">16GB</option>
+					<option value="8">32GB</option>
 				</select>
 				<input type="hidden" name="capacidadram_text" id="text_content24" value="<?=$cadena_capacidadram;?>" />
 			</div>
@@ -262,7 +258,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: MARCA MONITOR -->
 			<div class="col-4">
-				<label for="selDicMarcasMonitor">Marca del Monitor</label>
+				<label>Marca del Monitor</label>
 				<select class="form-control" id="selDicMarcasMonitor" name="DicMarcasMonitor" onchange="document.getElementById('text_content25').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_marca;?>" selected disabled><?=$cadena_marca;?></option>
 					<?php 
@@ -279,7 +275,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: TAMAÑO MONITOR -->
 			<div class="col-4">
-				<label for="selTamañoMonitor">Tamaño del Monitor</label>
+				<label>Tamaño del Monitor</label>
 				<select class="form-control" id="selTamañoMonitor" name="TamañoMonitor" onchange="document.getElementById('text_content26').value=this.options[this.selectedIndex].text">
 					<option value="0" selected disabled><?=$cadena_dimensionmonitor;?></option>
 					<option value="1">14</option>
@@ -297,7 +293,7 @@ foreach ($data as $Objeto) {
 					<option value="13">34</option>
 				</select>
 				<input type="hidden" name="tamañomonitor_text" id="text_content26" value="<?=$cadena_dimensionmonitor;?>" />
-				<small id="monitorHelp" class="form-text text-muted">Tamaño en pulgadas</small>
+				<small class="form-text text-muted">Tamaño en pulgadas</small>
 			</div>
 		</div>
 		
@@ -318,7 +314,7 @@ foreach ($data as $Objeto) {
 		<!-- PROPIEDAD: SISTEMA OPERATIVO -->
 		<div class="row" style="margin-top: 30px;">
 			<div class="col-4">
-				<label for="selSistema">Sistema Operativo</label>
+				<label>Sistema Operativo</label>
 				<select class="form-control" id="selSistema" name="SistemaOperativo" onchange="document.getElementById('text_content27').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_SO;?>" selected disabled><?=$cadena_SO;?></option>
 					<?php 
@@ -335,8 +331,8 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: VERSION SO -->
 			<div class="col-4">
-				<label for="selVersionSO">Versión del Sistema Operativo</label>
-				<select class="form-control" id="selVersionSO" name="VersionSO" onchange="document.getElementById('text_content28').value=this.options[this.selectedIndex].text">
+				<label>Versión del Sistema Operativo</label>
+				<select class="form-control" id="SELVersionSOM" name="VersionSO" onchange="document.getElementById('text_content28').value=this.options[this.selectedIndex].text">
 					<option value="0" selected disabled><?=$cadena_versionSO;?></option>
 					<option value="1">Home</option>
 					<option value="2">Pro</option>
@@ -364,10 +360,9 @@ foreach ($data as $Objeto) {
 			<!-- DECONSTRUCCIÓN CADENA ARQUITECTURA SO -->
 			<?php  $cadena_arquitecturaObjeto = $Objeto->arquitectura_equipos;
 			?>
-
 			<!-- PROPIEDAD: ARQUITECTURA SO -->
 			<div class="col-4">
-				<label for="selArquitectura">Arquitectura del Sistema Operativo</label>
+				<label>Arquitectura del Sistema Operativo</label>
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineArquitectura1M" value="x32 bits" 
 					<?php 
@@ -375,15 +370,15 @@ foreach ($data as $Objeto) {
 					<label class="form-check-label" for="inlineArquitectura1M">x32 bits</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineArquitctura2M" value="x64 bits"	
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineArquitectura2M" value="x64 bits"	
 					<?php 
 					if ($cadena_arquitecturaObjeto=='x64 bits'){echo 'checked';}?>>
-					<label class="form-check-label" for="inlineArquitctura2M">x64 bits</label>
+					<label class="form-check-label" for="inlineArquitectura2M">x64 bits</label>
 				</div>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 30px;">
 
+		<div class="row" style="margin-top: 30px;">
 			<!-- DECONSTRUCCIÓN CADENA OFFICE -->
 			<?php  $cadena_officeObjeto = $Objeto->office_equipos;
 
@@ -401,7 +396,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: VERSION OFFICE -->
 			<div class="col-4">
-				<label for="selVersionOffice">Versión de Office</label>
+				<label>Versión de Office</label>
 				<select class="form-control" id="selVersionOffice" name="VersionOffice" onchange="document.getElementById('text_content29').value=this.options[this.selectedIndex].text">
 					<option value="<?=$int_office;?>" selected disabled><?=$cadena_office;?></option>
 					<?php 
@@ -418,7 +413,7 @@ foreach ($data as $Objeto) {
 
 			<!-- PROPIEDAD: EDICION OFFICE -->
 			<div class="col-4">
-				<label for="selEdicionOffice">Edición de Office</label>
+				<label>Edición de Office</label>
 				<select class="form-control" id="selEdicionOffice" name="EdicionOffice" onchange="document.getElementById('text_content30').value=this.options[this.selectedIndex].text">
 					<option value="0" selected disabled><?=$cadena_versionOffice;?></option>
 					<option value="1">365</option>
@@ -430,16 +425,83 @@ foreach ($data as $Objeto) {
 				</select>
 				<input type="hidden" name="edicionoffice_text" id="text_content30" value="<?=$cadena_versionOffice;?>" />
 			</div>
+
+			<!-- DECONSTRUCCION CADENA FECHA -->
+			<?php 
+			$cadena = $Objeto->fechain_equipos;
+			$array = explode("-", $cadena);
+			$dia = $array[2];
+			$dia = trim(substr($dia, 0, 2));
+			$mes = $array[1];
+			$año = $array[0];
+			$fechafinal = $dia . "/" . $mes . "/" . $año; 
+			?>
+			<!-- PROPIEDAD: ANTIGUEDAD -->
+			<div class="col-4">
+				<label>Antigüedad del equipo</label><br>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="AntiguedadEquipo" id="inlineAntiguedad1M" value="Nuevo" 
+					<?php 
+					if ($Objeto->ant_equipos=='Nuevo'){echo 'checked';}?>>
+					<label class="form-check-label" for="inlineAntiguedad1M">Nuevo</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="AntiguedadEquipo" id="inlineAntiguedad2M" value="Usado"	
+					<?php 
+					if ($Objeto->ant_equipos=='Usado'){echo 'checked';}?>>
+					<label class="form-check-label" for="inlineAntiguedad2M">Usado</label>
+				</div>
+			</div>
 		</div>
-		<div style="margin-top: 25px; text-align: right;" >
+		<div class="row" style="margin-top: 30px;">
+			<div class="col-8">
+				<label>Últimas Modificaciones</label><br>
+				<textarea class="form-control" name="ModificacionEquipo" rows="3"><?=$Objeto->modificacion_equipos;?></textarea> 
+			</div>
+			<div class="fec col-4" style="display:none;">
+				<label>Fecha de adquisición</label>
+				<input id="datepickerM" name="FechaInEquipoM" value="<?=$fechafinal?>">
+				<script>
+					$('#datepickerM').datepicker({
+						format: "dd/mm/yyyy",
+						autoclose: true,
+						uiLibrary: 'bootstrap4'
+					});
+				</script>
+				<small class="form-text text-muted">DD/MM/AAAA</small>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 50px;" >
 			<button type="button" class="btn btn-secondary btnCancelarModificar" style="margin-right: 25px;">Cancelar</button>
 			<button type="submit" class="btn btn-primary btnGuardarModificar" >Guardar</button>
 		</div>	
 	</form>
 <?php } ?>
 
+<!-- METODO ORDENAMIENTO VERSION SO -->
+<script type="text/javascript">
+	$("#SELVersionSOM").append($("#SELVersionSOM option:gt(0)").sort(function (a, b) {
+		return a.text == b.text ? 0 : a.text < b.text ? -1 : 1;
+	}));
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
+		// PROPIEDAD: ANTIGUEDAD (MOSTRAR CALENDARIO)
+		if($('input:radio[name=AntiguedadEquipo]:checked').val() == 'Usado'){
+			$('div.fec').show();
+		}
+		// PROPIEDAD: ANTIGUEDAD (EVENTO CALENDARIO)
+		$("input[name$='AntiguedadEquipo']").click(function() {
+			var test = $(this).val();
+			if (test=='Usado'){
+				$('div.fec').show();
+				$('#datepickerM').show();
+			}else{
+				$('div.fec').hide();
+			}
+		});
+
 		$(".btnGuardarModificar").on('click', function(){
 			var accion = 'modificar';
 			var idEquipo = <?php echo $_POST['idEquipo']; ?>;
@@ -448,21 +510,14 @@ foreach ($data as $Objeto) {
 				url     : 'controller/equipoController.php',
 				data    : $("#formEquipoM").serialize() + '&idEquipo=' + idEquipo + '&accion=' + accion,
 				success: function(data){
-					if (data!='error_ip' && data!='error_vacio'){ 
+					if (data==''){ 
 						alert("Equipo modificado exitosamente");
 						window.location.reload(true);
 					}else{
-						if (data=='error_ip'){
-							alert("Formato de ip inválida")
-						}else{
-							alert("Rellene todos los campos vacíos");
-						}
+						alert(data);
 					}
 				}
-			}).fail( function( jqXHR, textStatus, errorThrown ) {
-				alert( 'Error!!' );
 			});
-
 		});
 		$(".btnCancelarModificar").on('click',function(){
 			window.location.reload(true);

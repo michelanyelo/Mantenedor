@@ -1,15 +1,15 @@
 <div class="list-group center-text">
-	<a class="list-group-item list-group-item-action active" style ="color: white !important">Menú Rápido</a>
-	<!-- Button trigger modal -->
-	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalEquipo"><i class="fas fa-desktop"></i> Agregar Equipo</a>
+	<a class="list-group-item list-group-item-action disabled" style ="background-color: #2d3436 ;color: white !important">Menú Rápido de Equipo</a>
+	<!-- BOTON trigger modal -->
+	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalEquipo"><i class="fas fa-desktop"></i> Agregar Nuevo</a>
 	
-	<!-- Modal Equipo-->
+	<!-- MODAL NUEVO EQUIPO-->
 	<div class="modal" id="modalEquipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<form id="formEquipo">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Agregar Equipo</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Agregar nuevo equipo</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -23,9 +23,10 @@
 									<input type="text" class="form-control" name="IpEquipo">
 									<small id="rendimientoProcesadorlHelp" class="form-text text-muted">ej: 192.168.1.1</small>
 								</div>
+
 								<!-- PROPIEDAD: TIPO EQUIPO-->
 								<div class="col-4">
-									<label for="selTipoEquipo">Tipo de equipo</label>
+									<label>Tipo de equipo</label>
 									<select class="form-control" name="TipoEquipo" onchange="document.getElementById('text_content1').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -39,9 +40,10 @@
 									</select>
 									<input type="hidden" name="tipoequipo_text" id="text_content1" value="" />
 								</div>
+
 								<!-- PROPIEDAD: ESTADO EQUIPO -->
 								<div class="col-4">
-									<label for="selEstadoEquipo">Estado de equipo</label>
+									<label>Estado de equipo</label>
 									<select class="form-control" name="EstadoEquipo" onchange="document.getElementById('text_content2').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -56,10 +58,11 @@
 									<input type="hidden" name="estadoequipo_text" id="text_content2" value="" />
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px;">
+								<!-- PROPIEDAD: MARCA GABINETE -->
 								<div class="col-4">
-									<!-- PROPIEDAD: MARCA GABINETE -->
-									<label for="selDicMarcasGabinete">Marca del gabinete</label>
+									<label>Marca del gabinete</label>
 									<select class="form-control" name="DicMarcasGabinete" onchange="document.getElementById('text_content3').value=this.options[this.selectedIndex].text" >
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -74,9 +77,10 @@
 									<input type="hidden" name="marcagabinete_text" id="text_content3" value="" />
 									<small id="gabineteHelp" class="form-text text-muted">Seleccione Genérico(a) si es desconocido</small>
 								</div>
+
 								<!-- PROPIEDAD: MARCA PROCESADOR -->
 								<div class="col-4">
-									<label for="selDicMarcasProcesador">Marca del procesador</label>
+									<label>Marca del procesador</label>
 									<select class="form-control" name="DicMarcasProcesador" onchange="document.getElementById('text_content4').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -90,17 +94,19 @@
 									</select>
 									<input type="hidden" name="marcaprocesador_text" id="text_content4" value="" />
 								</div>
-								<!-- PROPIEDAD: RENDIMIENTO PROCESADOR -->
+
+								<!-- PROPIEDAD: DESCRIPCION PROCESADOR -->
 								<div class="col-4">
-									<label for="inputRendimientoProcesador">Descripción del procesador</label>
+									<label>Descripción del procesador</label>
 									<input type="text" class="form-control" name="inputRendimientoProcesador">
 									<small id="rendimientoProcesadorlHelp" class="form-text text-muted">ej: i5-4210U</small>
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px;">
 								<!-- PROPIEDAD: MARCA HDD -->
 								<div class="col-4">
-									<label for="selDicMarcasHDD">Marca del Disco Duro</label>
+									<label>Marca del Disco Duro</label>
 									<select class="form-control" name="DicMarcasHDD" onchange="document.getElementById('text_content5').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -114,24 +120,19 @@
 									</select>
 									<input type="hidden" name="marcahdd_text" id="text_content5" value="" />
 								</div>
+
 								<!-- PROPIEDAD: CAPACIDAD HDD -->
 								<div class="col-4">
-									<label for="selCapacidadHDD">Capacidad de HDD</label>
-									<select class="form-control" name="CapacidadHDD" onchange="document.getElementById('text_content6').value=this.options[this.selectedIndex].text">
-										<option value="0" selected disabled>Seleccione: </option>
-										<option value="1">2GB</option>
-										<option value="2">4GB</option>
-										<option value="3">8GB</option>
-										<option value="4">16GB</option>
-										<option value="5">32GB</option>
-									</select>
-									<input type="hidden" name="capacidadhdd_text" id="text_content6" value="" />
+									<label>Capacidad de HDD</label>
+									<input type="text" class="form-control" name="CapacidadHDD">
+									<small id="capacidadHDDlHelp" class="form-text text-muted">ej: 500GB ó 1TB</small>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px;">
+
 								<!-- PROPIEDAD: MARCA MEMORIA RAM -->
 								<div class="col-4">
-									<label for="selDicMarcasRam">Marca de la Memoria RAM</label>
+									<label>Marca de la Memoria RAM</label>
 									<select class="form-control" name="DicMarcasRam" onchange="document.getElementById('text_content7').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -145,9 +146,10 @@
 									</select>
 									<input type="hidden" name="marcaram_text" id="text_content7" value="" />
 								</div>
+
 								<!-- PROPIEDAD: TIPO MEMORIA RAM -->
 								<div class="col-4">
-									<label for="selTipoRam">Tipo de RAM</label>
+									<label>Tipo de RAM</label>
 									<select class="form-control" name="TipoRam" onchange="document.getElementById('text_content8').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<option value="1">DDR</option>
@@ -157,24 +159,29 @@
 									</select>
 									<input type="hidden" name="tiporam_text" id="text_content8" value="" />
 								</div>
-								<!-- PROPIEDAD: CAPACIDAD MEMORIA RAM -->
+
+								<!-- PROPIEDAD: RENDIMIENTO MEMORIA RAM -->
 								<div class="col-4">
-									<label for="selCapacidadRam">Capacidad de RAM</label>
+									<label>Capacidad de RAM</label>
 									<select class="form-control" name="CapacidadRam" onchange="document.getElementById('text_content9').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<option value="1">2GB</option>
-										<option value="2">4GB</option>
-										<option value="3">8GB</option>
-										<option value="4">16GB</option>
-										<option value="4">32GB</option>
+										<option value="2">3GB</option>
+										<option value="3">4GB</option>
+										<option value="4">5GB</option>
+										<option value="5">6GB</option>
+										<option value="6">8GB</option>
+										<option value="7">16GB</option>
+										<option value="8">32GB</option>
 									</select>
 									<input type="hidden" name="capacidadram_text" id="text_content9" value="" />
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px;">
 								<!-- PROPIEDAD: MARCA MONITOR -->
 								<div class="col-4">
-									<label for="selDicMarcasMonitor">Marca del Monitor</label>
+									<label>Marca del Monitor</label>
 									<select class="form-control" name="DicMarcasMonitor" onchange="document.getElementById('text_content10').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -188,32 +195,35 @@
 									</select>
 									<input type="hidden" name="marcamonitor_text" id="text_content10" value="" />
 								</div>
+
 								<!-- PROPIEDAD: TAMAÑO MONITOR -->
 								<div class="col-4">
-									<label for="selTamañoMonitor">Tamaño del Monitor</label>
+									<label>Tamaño del Monitor</label>
 									<select class="form-control" name="TamañoMonitor" onchange="document.getElementById('text_content11').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
-										<option value="1">14''</option>
-										<option value="2">15''</option>
-										<option value="3">17''</option>
-										<option value="4">19''</option>
-										<option value="5">21''</option>
-										<option value="6">22''</option>
-										<option value="7">24''</option>
-										<option value="8">25''</option>
-										<option value="9">26''</option>
-										<option value="10">27''</option>
-										<option value="11">29''</option>
-										<option value="12">32''</option>
-										<option value="13">34''</option>
+										<option value="1">14</option>
+										<option value="2">15</option>
+										<option value="3">17</option>
+										<option value="4">19</option>
+										<option value="5">21</option>
+										<option value="6">22</option>
+										<option value="7">24</option>
+										<option value="8">25</option>
+										<option value="9">26</option>
+										<option value="10">27</option>
+										<option value="11">29</option>
+										<option value="12">32</option>
+										<option value="13">34</option>
 									</select>
 									<input type="hidden" name="tamañomonitor_text" id="text_content11" value="" />
+									<small id="monitorHelp" class="form-text text-muted">Tamaño en pulgadas</small>
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px;">
 								<!-- PROPIEDAD: SISTEMA OPERATIVO -->
 								<div class="col-4">
-									<label for="selSistema">Sistema Operativo</label>
+									<label>Sistema Operativo</label>
 									<select class="form-control" name="SistemaOperativo" onchange="document.getElementById('text_content12').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -227,10 +237,11 @@
 									</select>
 									<input type="hidden" name="sistemaoperativo_text" id="text_content12" value="" />
 								</div>
+
 								<!-- PROPIEDAD: VERSION SO -->
 								<div class="col-4">
-									<label for="selVersionSO">Versión del Sistema Operativo</label>
-									<select class="form-control" name="VersionSO" onchange="document.getElementById('text_content13').value=this.options[this.selectedIndex].text">
+									<label>Versión del Sistema Operativo</label>
+									<select id="SELVersionSO" class="form-control" name="VersionSO" onchange="document.getElementById('text_content13').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<option value="1">Home</option>
 										<option value="2">Pro</option>
@@ -254,23 +265,25 @@
 									</select>
 									<input type="hidden" name="versionsistema_text" id="text_content13" value="" />
 								</div>
+
 								<!-- PROPIEDAD: ARQUITECTURA SO -->
 								<div class="col-4">
-									<label for="selArquitectura">Arquitectura del Sistema Operativo</label>
+									<label>Arquitectura del Sistema Operativo</label>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" value="x32 bits">
+										<input class="form-check-input" type="radio" name="ArquitecturaSO" value="x32 bits">
 										<label class="form-check-label" for="inlineArquitectura1">x32 bits</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineArquitctura2" value="x64 bits">
-										<label class="form-check-label" for="inlineArquitctura2">x64 bits</label>
+										<input class="form-check-input" type="radio" name="ArquitecturaSO" id="inlineArquitectura2" value="x64 bits">
+										<label class="form-check-label" for="inlineArquitectura2">x64 bits</label>
 									</div>
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px;">
 								<!-- PROPIEDAD: VERSION OFFICE -->
 								<div class="col-4">
-									<label for="selVersionOffice">Versión de Office</label>
+									<label>Versión de Office</label>
 									<select class="form-control" name="VersionOffice" onchange="document.getElementById('text_content14').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<?php 
@@ -284,9 +297,10 @@
 									</select>
 									<input type="hidden" name="versionoffice_text" id="text_content14" value="" />
 								</div>
+
 								<!-- PROPIEDAD: EDICION OFFICE -->
 								<div class="col-4">
-									<label for="selEdicionOffice">Edición de Office</label>
+									<label>Edición de Office</label>
 									<select class="form-control" name="EdicionOffice" onchange="document.getElementById('text_content15').value=this.options[this.selectedIndex].text">
 										<option value="0" selected disabled>Seleccione: </option>
 										<option value="1">365</option>
@@ -297,6 +311,33 @@
 										<option value="6">Standard</option>
 									</select>
 									<input type="hidden" name="edicionoffice_text" id="text_content15" value="" />
+								</div>
+
+								<!-- PROPIEDAD: ANTIGUEDAD -->
+								<div class="col-4">
+									<label>Antigüedad del equipo</label>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="AntiguedadEquipo" value="Nuevo">
+										<label class="form-check-label" for="inlineAntiguedad1">Nuevo</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="AntiguedadEquipo" id="inlineAntiguedad2" value="Usado">
+										<label class="form-check-label" for="inlineAntiguedad2">Usado</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 30px; float:right;">
+								<div class="fec col-10" style="display:none;">
+									<label>Fecha de adquisición</label>
+									<input id="datepicker" name="FechaInEquipo">
+									<script>
+										$('#datepicker').datepicker({
+											format: 'dd/mm/yyyy',
+											autoclose: true,
+											uiLibrary: 'bootstrap4'
+										});
+									</script>
 								</div>
 							</div>
 						</div>
@@ -309,8 +350,9 @@
 			</form>
 		</div>
 	</div>
+	
 	<!-- Button trigger modal -->
-	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalDepartamento"><i class="far fa-building"></i> Agregar Departamento</a>
+	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalDepartamento"><i class="far fa-building"></i> Mover a Departamento</a>
 
 	<!-- Modal Departamento-->
 	<div class="modal" id="modalDepartamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -334,7 +376,7 @@
 	</div>
 
 	<!-- Button trigger modal -->
-	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalOficina"><i class="fas fa-door-open"></i> Agregar Oficina</a>
+	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalOficina"><i class="fas fa-door-open"></i> Mover a Oficina</a>
 
 	<!-- Modal Oficina-->
 	<div class="modal" id="modalOficina" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -358,7 +400,7 @@
 	</div>
 
 	<!-- Button trigger modal -->
-	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalFuncionario"><i class="fas fa-user-plus"></i> Agregar Funcionario</a>
+	<a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modalFuncionario"><i class="fas fa-user-plus"></i> Asignar a Funcionario</a>
 
 	<!-- Modal Funcionario-->
 	<div class="modal" id="modalFuncionario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
