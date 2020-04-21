@@ -13,6 +13,9 @@ class Equipos{
 	public $arquitecturaequipo;
 	public $soequipo;
 	public $officeequipo;
+	public $antiguedadequipo;
+	public $fechainequipo;
+	public $modificacionequipo;
 
 	public function __construct(){
 		$this->idequipo = '';
@@ -27,6 +30,9 @@ class Equipos{
 		$this->arquitecturaequipo = '';
 		$this->soequipo = '';
 		$this->officeequipo = '';
+		$this->antiguedadequipo = '';
+		$this->fechainequipo = '';
+		$this->modificacionequipo = '';
 	}
 
 	public function setIdequipo($idequipo){
@@ -125,6 +131,30 @@ class Equipos{
 		return $this->officeequipo;
 	}
 
+	public function setAntiguedadequipo($antiguedadequipo){
+		$this->antiguedadequipo = $antiguedadequipo;
+	}
+
+	public function getAntiguedadequipo(){
+		return $this->antiguedadequipo;
+	}
+
+	public function setFechaIngreso($fechainequipo){
+		$this->fechainequipo = $fechainequipo;
+	}
+
+	public function getFechaIngreso(){
+		return $this->fechainequipo;
+	}
+
+	public function setModificacionequipo($modificacionequipo){
+		$this->modificacionequipo = $modificacionequipo;
+	}
+
+	public function getModificacionequipo(){
+		return $this->modificacionequipo;
+	}
+
 	// RELACION CLASE - BASE DE DATOS
 
 	public function mostrarDatos(){
@@ -147,7 +177,7 @@ class Equipos{
 	public function mostrarDatosId($id_equipo){
 		global $conn;
 		try{
-			$sql = "SELECT idEquipos, ipEquipos, idTipoEquipos, idEstadoEquipos, marca_equipos, procesador_equipos, ram_equipos, hdd_equipos, monitor_equipos, arquitectura_equipos, so_equipos, office_equipos FROM equipos WHERE idEquipos = '$id_equipo'";
+			$sql = "SELECT * FROM equipos WHERE idEquipos = '$id_equipo'";
 			$resultado = $conn->query($sql);
 			if($resultado->num_rows> 0){
 				$objetos = new arrayobject();
@@ -164,7 +194,7 @@ class Equipos{
 	public function mostrarTipo(){
 		global $conn;
 		try{
-			$sql = "SELECT * from eq_tipo";
+			$sql = "SELECT * from dic_tipo";
 			$resultado = $conn->query($sql);
 			if($resultado->num_rows > 0){
 				$objetos = new arrayobject();
@@ -181,7 +211,7 @@ class Equipos{
 	public function mostrarEstado(){
 		global $conn;
 		try{
-			$sql = "SELECT * from eq_estado";
+			$sql = "SELECT * from dic_estado";
 			$resultado = $conn->query($sql);
 			if($resultado->num_rows > 0){
 				$objetos = new arrayobject();
@@ -258,11 +288,35 @@ class Equipos{
 		$arquitectura_equipo = $this->getArquitecturaequipo();
 		$sistema_equipo = $this->getSoequipo();
 		$office_equipo = $this->getOfficeequipo();
-		// VERIFICAR DUPLICACIONES DE IP ACTIVA
+		$ant_equipo = $this->getAntiguedadequipo();
+		$fechain_equipo = $this->getFechaIngreso();
 		global $conn;
 		try{
-			$sql = "INSERT INTO equipos (ipEquipos, idTipoEquipos, idEstadoEquipos, marca_equipos, procesador_equipos, ram_equipos, hdd_equipos, monitor_equipos, arquitectura_equipos, so_equipos, office_equipos) VALUES ('".$ip_equipo."', '".$tipo_equipo."', '".$estado_equipo."',  '".$marca_equipo."', '".$procesaror_equipo."', '".$ram_equipo."', '".$hdd_equipo."', '".$monitor_equipo."', '".$arquitectura_equipo."', '".$sistema_equipo."', '".$office_equipo."')";
+			$sql = "INSERT INTO equipos (ipEquipos, idTipoEquipos, idEstadoEquipos, marca_equipos, procesador_equipos, ram_equipos, hdd_equipos, monitor_equipos, arquitectura_equipos, so_equipos, office_equipos, ant_equipos, fechain_equipos) VALUES ('".$ip_equipo."', '".$tipo_equipo."', '".$estado_equipo."',  '".$marca_equipo."', '".$procesaror_equipo."', '".$ram_equipo."', '".$hdd_equipo."', '".$monitor_equipo."', '".$arquitectura_equipo."', '".$sistema_equipo."', '".$office_equipo."', '".$ant_equipo."', '".$fechain_equipo."')";
 			$conn->query($sql);
+		}catch(Exception $e){
+			echo "Error" . $e->getMessage() . "<br>";
+		}
+	}
+
+	public function grabarLog(){
+		if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        //ip from share internet
+			$ip_local = $_SERVER['HTTP_CLIENT_IP'];
+		}elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        //ip pass from proxy
+			$ip_local = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}else{
+			$ip_local = $_SERVER['REMOTE_ADDR'];
+		}
+		
+		$ip_equipo = $this->getIpequipo();
+		$fechain_equipo = $this->getFechaIngreso();
+		$modificacion_equipo = $this->getModificacionequipo();
+		global $conn;
+		try{
+			$sql_log = "INSERT INTO equipos_log (ipLocal, ipEquipos, fechain_equipos, modificacion_equipos) VALUES ('".$ip_local."', '".$ip_equipo."', now(), '".$modificacion_equipo."')";
+			$conn->query($sql_log);
 		}catch(Exception $e){
 			echo "Error" . $e->getMessage() . "<br>";
 		}
@@ -280,10 +334,13 @@ class Equipos{
 		$arquitectura_equipo = $this->getArquitecturaequipo();
 		$sistema_equipo = $this->getSoequipo();
 		$office_equipo = $this->getOfficeequipo();
-		// VERIFICAR DUPLICACIONES DE IP ACTIVA
+		$ant_equipo = $this->getAntiguedadequipo();
+		$fechain_equipo = $this->getFechaIngreso();
+		$modificacion_equipo = $this->getModificacionequipo();
+
 		global $conn;
 		try{
-			$sql = "UPDATE equipos SET ipEquipos = '$ip_equipo', idTipoEquipos = '$tipo_equipo', idEstadoEquipos = '$estado_equipo', marca_equipos = '$marca_equipo', procesador_equipos = '$procesaror_equipo', ram_equipos = '$ram_equipo', hdd_equipos = '$hdd_equipo', monitor_equipos = '$monitor_equipo', arquitectura_equipos = '$arquitectura_equipo', so_equipos = '$sistema_equipo', office_equipos = '$office_equipo' WHERE idEquipos = '$id_equipo'";
+			$sql = "UPDATE equipos SET ipEquipos = '$ip_equipo', idTipoEquipos = '$tipo_equipo', idEstadoEquipos = '$estado_equipo', marca_equipos = '$marca_equipo', procesador_equipos = '$procesaror_equipo', ram_equipos = '$ram_equipo', hdd_equipos = '$hdd_equipo', monitor_equipos = '$monitor_equipo', arquitectura_equipos = '$arquitectura_equipo', so_equipos = '$sistema_equipo', office_equipos = '$office_equipo', ant_equipos = '$ant_equipo', fechain_equipos = '$fechain_equipo', modificacion_equipos = '$modificacion_equipo' WHERE idEquipos = '$id_equipo'";
 			$conn->query($sql);
 		}catch(Exception $e){
 			echo "Error" . $e->getMessage() . "<br>";
