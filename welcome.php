@@ -2,8 +2,8 @@
 /**
 * @author: Miguel Monzón Martínez
 * @copyright: miguel.monzon@quillota.cl
-* @version: 1.0
-* 20-04-2020
+* @version: 0.8
+* 13-04-2020
 */ 
 require_once "class/Conexion.php"; 
 require_once "class/Equipos.php";
@@ -33,7 +33,7 @@ if(!isset($_SESSION['usuario'])){
 	<!-- FONTAWESOME -->
 	<script src="https://kit.fontawesome.com/fd01d0d9be.js" crossorigin="anonymous"></script>
 	<!-- JAVASCRIPT -->
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!-- BOOTSTRAP -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -49,10 +49,13 @@ if(!isset($_SESSION['usuario'])){
 	<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
 	
 	<title>Inventario Municipal</title>
 </head>
 <body>
+
 	<div class="container"> 
 		<nav class="navbar navbar-dark bg-dark" style="margin-top:5px;">
 			<div class="container-fluid">
@@ -73,7 +76,7 @@ if(!isset($_SESSION['usuario'])){
 			<div class="collapse navbar-collapse center-text" id="navbarTogglerInicio">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
-						<a class="nav-link" href="index.php"> Equipos <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="welcome.php"> Inventario <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Funcionarios</a>
@@ -124,9 +127,10 @@ if(!isset($_SESSION['usuario'])){
 	}));
 </script>
 
-<!-- INICIAR DATATABLE -->
 <script type="text/javascript">
-	$(document).ready(function(){ 
+	$(document).ready(function(){
+
+		// INICIAR DATATABLE 
 		var table = $('#tabla-equipos').DataTable( {
 			language: {
 				"decimal": "",
@@ -148,7 +152,7 @@ if(!isset($_SESSION['usuario'])){
 					"previous": "Anterior"
 				}
 			},
-			pageLength : 5,
+
 			lengthChange: false,
 			buttons: [{
 				extend: "excel", className: "btn btn-secondary",
@@ -167,15 +171,11 @@ if(!isset($_SESSION['usuario'])){
 				}
 			}],
 		});
+
+
 		table.buttons().container()
 		.appendTo( '#tabla-equipos_wrapper .col-md-6:eq(0)' );
-	});
-</script>
 
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		
 		// ACTIVAR CALENDARIO EN EQUIPOS USADOS
 		$("input[name$='AntiguedadEquipo']").click(function() {
 			var test = $(this).val();
@@ -197,7 +197,6 @@ if(!isset($_SESSION['usuario'])){
 				success: function(data){
 					if (data==''){ 
 						alert("Datos almacenados exitosamente");
-						location.reload(true);
 					}else{
 						alert(data);
 					}
@@ -205,14 +204,13 @@ if(!isset($_SESSION['usuario'])){
 			});
 		});
 
-		// ACCIONES DESDE LA TABLA EQUIPOS: 
-		//VER DETALLES, 
-		$(document.body).on('click', '.btnVerEquipo', function() {
+		// ACCIONES DESDE LA TABLA EQUIPOS: VER DETALLES, 
+		$(".btnVerEquipo").on('click',function(){
 			var idEquipo = $(this).val();
 			$("#contentMyModal").load("views/equipodetallesView.php",{idEquipo:idEquipo});
 		});
 		// MODIFICAR (equipomodificarView.php)
-		$(document.body).on('click', '.btnEditarEquipo', function() {
+		$(".btnEditarEquipo").on('click',function(){
 			// OCULTAR DATATABLE
 			$('#tabla-equipos').parents('div.dataTables_wrapper').first().hide();
 			$("#tabla-equipos").hide();
@@ -220,7 +218,7 @@ if(!isset($_SESSION['usuario'])){
 			$("#contentMyForm").load("views/equipomodificarView.php",{idEquipo:idEquipo});
 		});
 		// Y ELIMINAR (equipoController.php)
-		$(document.body).on('click', '.btnEliminarEquipo', function() {
+		$(".btnEliminarEquipo").on('click',function(){
 			var result = confirm("¿Está seguro/a de esta operación?");
 			if (result) {
 				var accion = 'eliminar';
